@@ -1,6 +1,6 @@
 ﻿/*
- * Copyright (C) 2017 - 2019. Filament Games, LLC. All rights reserved.
- * Author:  Alex Beauchesne
+ * Copyright (C) 2017 - 2020. Filament Games, LLC. All rights reserved.
+ * Author:  Autumn Beauchesne
  * Date:    24 July 2019
  * 
  * File:    CompilerRules.cs
@@ -54,6 +54,14 @@ namespace BeauMacro
             #region Toggle Groups
 
             /// <summary>
+            /// Replaces [A] with ?(if VAR_A)A?(endif)
+            /// </summary>
+            static public Pair BracketConditional(string inVariable)
+            {
+                return CustomConditional("[", "]", inVariable, null);
+            }
+
+            /// <summary>
             /// Replaces [A|B] with ?(if VAR_A)A?(else)B?(endif)
             /// </summary>
             static public Pair BracketToggle(string inVariableA)
@@ -70,6 +78,14 @@ namespace BeauMacro
             }
 
             /// <summary>
+            /// Replaces P[A] with ?(if VAR_A)A?(endif)
+            /// </summary>
+            static public Pair PrefixedBracketConditional(string inPrefix, string inVariable)
+            {
+                return CustomConditional(inPrefix + "[", "]", inVariable, null);
+            }
+
+            /// <summary>
             /// Replaces P[A|B] with ?(if VAR_A)A?(else)B?(endif)
             /// </summary>
             static public Pair PrefixedBracketToggle(string inPrefix, string inVariableA)
@@ -83,6 +99,18 @@ namespace BeauMacro
             static public Pair PrefixedBracketTriad(string inPrefix, string inVariableA, string inVariableB)
             {
                 return CustomTriad(inPrefix + "[", "|", "]", inVariableA, null, inVariableB, null, null);
+            }
+
+            /// <summary>
+            /// Replaces PREFIX OPEN MACRO CLOSE with a conditional based on variable.
+            /// </summary>
+            static public Pair CustomConditional(string inOpen, string inClose, string inVariable, string inFormat)
+            {
+                if (string.IsNullOrEmpty(inFormat))
+                    inFormat = "{0}";
+                string find = string.Format(@"{0}{1}{2}", Escape(inOpen), AnyCaptureGroup, Escape(inClose));
+                string replace = string.Format("?(if {0}){1}?(endif)", inVariable, string.Format(inFormat, "$1"));
+                return new Pair(find, replace);
             }
 
             /// <summary>
