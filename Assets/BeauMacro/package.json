@@ -3,7 +3,7 @@
 	"displayName": "BeauMacro",
 	"description" : "BeauMacro is a string replacement and macro expansion library, intended to facilitate efficient contextual string formatting. It supports ahead-of-time compilation of conditionally-formatted strings into efficient instruction lists, as well as providing context at runtime for modifying string results.",
 	"version": "0.1.1",
-	"unity": "2019.1",
+	"unity": "2019.2",
 	"author" : {
 	  "name" : "Autumn Beauchesne"
 	},
@@ -14,5 +14,8 @@
 	"repository": {
 	  "type": "git",
 	  "url": "git+https://github.com/BeauPrime/BeauMacro.git"
+    },
+    "publishConfig": {
+      "registry": "http://registry.filamentgames.com"
     }
 }
