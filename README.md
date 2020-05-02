@@ -1,7 +1,7 @@
 # BeauMacro
 
-**Current Version: 0.1.0**  
-Updated 24 July 2019 | Changelog (Not yet available)
+**Current Version: 0.1.1**  
+Updated 01 May 2020 | Changelog (Not yet available)
 
 ## About
 BeauMacro is a string replacement and macro expansion library, intended to facilitate efficient contextual string formatting. It supports ahead-of-time compilation of conditionally-formatted strings into efficient instruction lists, as well as providing context at runtime for modifying string results.
